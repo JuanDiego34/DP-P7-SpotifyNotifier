@@ -29,6 +29,7 @@ public class ClientCredentialsExample {
             // Set access token for further "spotifyApi" object usage
             spotifyApi.setAccessToken(clientCredentials.getAccessToken());
 
+            System.out.println("Access token: " + clientCredentials.getAccessToken());
             System.out.println("Expires in: " + clientCredentials.getExpiresIn());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
