@@ -7,6 +7,7 @@ import se.michaelthelin.spotify.model_objects.specification.Artist;
 import se.michaelthelin.spotify.model_objects.specification.Playlist;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import org.apache.hc.core5.http.ParseException;
+
 import se.michaelthelin.spotify.requests.data.artists.GetArtistRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistRequest;
 
@@ -52,7 +53,7 @@ public class SpotifyAPIcalls {
             GetPlaylistRequest getPlaylistRequest = spotifyApi.getPlaylist(idPlaylist).build();
             final Playlist playlist = getPlaylistRequest.execute();
 
-            System.out.println("Artist: " + playlist.getName());
+            System.out.println("Playlist: " + playlist.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
         }
