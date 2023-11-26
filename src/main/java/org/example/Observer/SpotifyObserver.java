@@ -8,7 +8,7 @@ package org.example.Observer;
 public interface SpotifySubject {
 
     /**
-     * Notify all attached observers of a change.
+     * Notify all attached observers of a change, when a checkForUpdates method, gets an Update
      */
     void notifyObservers();
 
