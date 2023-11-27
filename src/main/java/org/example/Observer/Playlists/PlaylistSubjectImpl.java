@@ -1,4 +1,4 @@
-package org.example.Observer.Playlists;
+ackage org.example.Observer.Playlists;
 
 import org.example.Observer.SpotifyObserver;
 import org.example.Observer.SpotifySubjectImpl;
@@ -9,10 +9,7 @@ import se.michaelthelin.spotify.model_objects.specification.PlaylistTrack;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistRequest;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @class PlaylistSubjectImpl
@@ -101,5 +98,54 @@ public class PlaylistSubjectImpl extends SpotifySubjectImpl {
             observer.update();
         }
     }
+    /*
+    private Map<String, List<PlaylistTrack>> playlistTrackMap;
+
+    public void checkForPlaylistUpdates() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Menú interactivo para añadir una canción ficticia
+        System.out.println("Introduce el nombre del artista:");
+        String artist = scanner.nextLine();
+        System.out.println("Introduce el nombre de la canción:");
+        String song = scanner.nextLine();
+        System.out.println("Elige el ID de la playlist a la que añadirás la canción:");
+        System.out.println("1: Today's Top Hits, 2: Top 50 - Global, 3: RapCaviar, 4: Viva Latino, 5: Rock Classics");
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        String playlistId;
+        switch (choice) {
+            case 1: playlistId = "37i9dQZF1DXcBWIGoYBM5M"; break;
+            case 2: playlistId = "37i9dQZEVXbMDoHDwVN2tF"; break;
+            case 3: playlistId = "37i9dQZF1DX0XUsuxWHRQd"; break;
+            case 4: playlistId = "37i9dQZF1DX10zKzsJ2jva"; break;
+            case 5: playlistId = "37i9dQZF1DWXRqgorJj26U"; break;
+            default: System.out.println("Selección inválida"); return;
+        }
+
+        PlaylistTrack fakeTrack = createFakePlaylistTrack(artist, song);
+        List<PlaylistTrack> currentTracks = playlistTrackMap.getOrDefault(playlistId, new ArrayList<>());
+        currentTracks.add(fakeTrack);
+        playlistTrackMap.put(playlistId, currentTracks);
+
+        notifyObservers();
+
+        System.out.println("La canción " + song + ", de " + artist + " ha sido añadida a la playlist " + playlistId);
+    }
+
+    private PlaylistTrack createFakePlaylistTrack(String artist, String song) {
+        // Genera un ID único para cada PlaylistTrack
+        String uniqueId = UUID.randomUUID().toString();
+
+        return new PlaylistTrack(uniqueId, song, artist);
+    }
+
+
+ */
 }
+
+
+
+
+
 
