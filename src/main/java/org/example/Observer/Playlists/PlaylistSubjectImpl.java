@@ -1,4 +1,4 @@
-ackage org.example.Observer.Playlists;
+package org.example.Observer.Playlists;
 
 import org.example.Observer.SpotifyObserver;
 import org.example.Observer.SpotifySubjectImpl;
