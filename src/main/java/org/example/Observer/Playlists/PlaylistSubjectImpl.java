@@ -98,6 +98,8 @@ public class PlaylistSubjectImpl extends SpotifySubjectImpl {
             observer.update();
         }
     }
+
+    // Este menú funciona como tool para desarrollador, es decir, internamente este es el menú que usarian los desarrolaldores para ñadir canciones a playlists
     /*
     private Map<String, List<PlaylistTrack>> playlistTrackMap;
 
@@ -128,7 +130,9 @@ public class PlaylistSubjectImpl extends SpotifySubjectImpl {
         currentTracks.add(fakeTrack);
         playlistTrackMap.put(playlistId, currentTracks);
 
-        notifyObservers();
+
+// VER AQUI FUNCION QUE MANDA NOTIFICACION A OBSERVERS
+       // notifyObservers();
 
         System.out.println("La canción " + song + ", de " + artist + " ha sido añadida a la playlist " + playlistId);
     }
