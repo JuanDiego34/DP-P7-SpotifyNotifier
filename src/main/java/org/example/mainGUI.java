@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 public class mainGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private JTextArea infoArtistsArea, infoPlaylistsArea;
 
     public mainGUI() {
         // Window configuration
@@ -32,14 +31,18 @@ public class mainGUI extends JFrame {
 
         // Artists information panel
         JPanel artistsPanel = new JPanel();
-        infoArtistsArea = new JTextArea(10, 30);
-        artistsPanel.add(new JScrollPane(infoArtistsArea));
+        artistsPanel.setLayout(new GridLayout(4, 1));
+        artistsPanel.add(new JButton("Artist 1"));
+        artistsPanel.add(new JButton("Artist 2"));
+        artistsPanel.add(new JButton("Artist 3"));
         artistsPanel.add(returnButton1);
 
         // Playlists information panel
         JPanel playlistsPanel = new JPanel();
-        infoPlaylistsArea = new JTextArea(10, 30);
-        playlistsPanel.add(new JScrollPane(infoPlaylistsArea));
+        playlistsPanel.setLayout(new GridLayout(4, 1));
+        playlistsPanel.add(new JButton("Playlist 1"));
+        playlistsPanel.add(new JButton("Playlist 2"));
+        playlistsPanel.add(new JButton("Playlist 3"));
         playlistsPanel.add(returnButton2);
 
         // Action listeners
@@ -47,7 +50,6 @@ public class mainGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardPanel, "Artists");
-                showInfo("Artists goes here", infoArtistsArea);
             }
         });
 
@@ -55,36 +57,31 @@ public class mainGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(cardPanel, "Playlists");
-                showInfo("Playlists goes here", infoPlaylistsArea);
             }
         });
 
         returnButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "buttons");
+                cardLayout.show(cardPanel, "Buttons");
             }
         });
 
         returnButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "buttons");
+                cardLayout.show(cardPanel, "Buttons");
             }
         });
 
         // Add panels to the main panel with  CardLayout
-        cardPanel.add(buttonsPanel, "buttons");
+        cardPanel.add(buttonsPanel, "Buttons");
         cardPanel.add(artistsPanel, "Artists");
         cardPanel.add(playlistsPanel, "Playlists");
 
         // Add the main panel to the window
         add(cardPanel);
         setVisible(true);
-    }
-
-    private void showInfo(String information, JTextArea infoArea) {
-        infoArea.setText(information);
     }
 
     public static void main(String[] args) {
