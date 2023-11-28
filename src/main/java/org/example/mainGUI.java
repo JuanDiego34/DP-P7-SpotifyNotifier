@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class mainGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPanel;
+    private ArrayList<JButton> followButtons, addSongButtons, returnButtons;
 
     public mainGUI() {
         // Window configuration
@@ -19,33 +21,63 @@ public class mainGUI extends JFrame {
         // Create components
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
+        followButtons = new ArrayList<JButton>();
+        addSongButtons = new ArrayList<JButton>();
+        returnButtons = new ArrayList<JButton>();
 
-        JPanel buttonsPanel = new JPanel(new FlowLayout());
+        // Main panel
+        JPanel mainPanel = new JPanel(new GridLayout());
+
         JButton artistsButton = new JButton("Artists");
+        artistsButton.setBackground(new Color(25, 20, 20));
+        artistsButton.setForeground(new Color(30, 215, 96));
+        artistsButton.setFont(new Font("SansSerif", Font.BOLD, 50));
+
         JButton playlistsButton = new JButton("Playlists");
-        buttonsPanel.add(artistsButton);
-        buttonsPanel.add(playlistsButton);
+        playlistsButton.setBackground(new Color(25, 20, 20));
+        playlistsButton.setForeground(new Color(30, 215, 96));
+        playlistsButton.setFont(new Font("SansSerif", Font.BOLD, 50));
 
-        JButton returnButton1 = new JButton("Return");
-        JButton returnButton2 = new JButton("Return");
+        mainPanel.add(artistsButton);
+        mainPanel.add(playlistsButton);
 
-        // Artists information panel
-        JPanel artistsPanel = new JPanel();
-        artistsPanel.setLayout(new GridLayout(4, 1));
-        artistsPanel.add(new JButton("Artist 1"));
-        artistsPanel.add(new JButton("Artist 2"));
-        artistsPanel.add(new JButton("Artist 3"));
-        artistsPanel.add(returnButton1);
+        // Sub-panels
+        String artistsNames[] = {"Artist 1", "Artist 2", "Artist 3"}; // Replace for Artist method getNames()
+        JPanel artistsPanel = newSubPanel(artistsNames, "Follow");
 
-        // Playlists information panel
-        JPanel playlistsPanel = new JPanel();
-        playlistsPanel.setLayout(new GridLayout(4, 1));
-        playlistsPanel.add(new JButton("Playlist 1"));
-        playlistsPanel.add(new JButton("Playlist 2"));
-        playlistsPanel.add(new JButton("Playlist 3"));
-        playlistsPanel.add(returnButton2);
+        String playlistsNames[] = {"Playlist 1", "Playlist 2", "Playlist 3"}; // Replace for Playlist method getNames()
+        JPanel playlistsPanel = newSubPanel(playlistsNames, "Add song");
 
         // Action listeners
+        for (JButton b: followButtons) {
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Temporal behaviour (replace for observer pattern)
+                    cardLayout.show(cardPanel, "Main");
+                }
+            });
+        }
+
+        for (JButton b: addSongButtons) {
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Temporal behaviour (replace for observer pattern)
+                    cardLayout.show(cardPanel, "Main");
+                }
+            });
+        }
+
+        for (JButton b: returnButtons) {
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    cardLayout.show(cardPanel, "Main");
+                }
+            });
+        }
+
         artistsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,28 +92,56 @@ public class mainGUI extends JFrame {
             }
         });
 
-        returnButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "Buttons");
-            }
-        });
-
-        returnButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "Buttons");
-            }
-        });
-
         // Add panels to the main panel with  CardLayout
-        cardPanel.add(buttonsPanel, "Buttons");
+        cardPanel.add(mainPanel, "Main");
         cardPanel.add(artistsPanel, "Artists");
         cardPanel.add(playlistsPanel, "Playlists");
 
         // Add the main panel to the window
         add(cardPanel);
         setVisible(true);
+    }
+
+    private JPanel newSubPanel(String[] names, String button) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < names.length; i++) {
+            panel.add(newItemPanel(names[i], button));
+        }
+
+        JPanel returnPanel = new JPanel();
+        JButton returnButton = new JButton("Return");
+        returnPanel.setBackground(new Color(25, 20, 20));
+        returnPanel.add(returnButton);
+        panel.add(returnPanel);
+
+        returnButtons.add(returnButton);
+
+        return panel;
+    }
+
+    private JPanel newItemPanel(String text, String type) {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(25, 20, 20));
+
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("SansSerif", Font.BOLD, 30));
+        label.setForeground(Color.WHITE);
+        panel.add(label);
+
+        JButton button = new JButton(type);
+        button.setBackground(new Color(30, 215, 96));
+        button.setFont(new Font("SansSerif", Font.BOLD, 20));
+        panel.add(button);
+
+        if (type == "Follow") {
+            followButtons.add(button);
+        } else {
+            addSongButtons.add(button);
+        }
+
+        return panel;
     }
 
     public static void main(String[] args) {
