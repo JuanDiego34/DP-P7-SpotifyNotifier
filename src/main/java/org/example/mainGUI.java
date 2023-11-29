@@ -5,11 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class mainGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private ArrayList<JButton> followButtons, addSongButtons, returnButtons;
+    private ArrayList<JButton> returnButtons;
+    HashMap<JButton, String> artistsMap, playlistsMap;
 
     public mainGUI() {
         // Window configuration
@@ -21,9 +23,9 @@ public class mainGUI extends JFrame {
         // Create components
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
-        followButtons = new ArrayList<JButton>();
-        addSongButtons = new ArrayList<JButton>();
         returnButtons = new ArrayList<JButton>();
+        artistsMap = new HashMap<JButton, String>();
+        playlistsMap = new HashMap<JButton, String>();
 
         // Main panel
         JPanel mainPanel = new JPanel(new GridLayout());
@@ -33,7 +35,7 @@ public class mainGUI extends JFrame {
         artistsButton.setForeground(new Color(30, 215, 96));
         artistsButton.setFont(new Font("SansSerif", Font.BOLD, 50));
 
-        JButton playlistsButton = new JButton("Playlists");
+        JButton playlistsButton = new JButton("My playlists");
         playlistsButton.setBackground(new Color(25, 20, 20));
         playlistsButton.setForeground(new Color(30, 215, 96));
         playlistsButton.setFont(new Font("SansSerif", Font.BOLD, 50));
@@ -43,27 +45,49 @@ public class mainGUI extends JFrame {
 
         // Sub-panels
         String artistsNames[] = {"Artist 1", "Artist 2", "Artist 3"}; // Replace for Artist method getNames()
-        JPanel artistsPanel = newSubPanel(artistsNames, "Follow");
+        JPanel artistsPanel = newSubPanel("Artists", artistsNames, "Follow");
 
         String playlistsNames[] = {"Playlist 1", "Playlist 2", "Playlist 3"}; // Replace for Playlist method getNames()
-        JPanel playlistsPanel = newSubPanel(playlistsNames, "Add song");
+        JPanel playlistsPanel = newSubPanel("Playlists", playlistsNames, "Add song");
 
         // Action listeners
-        for (JButton b: followButtons) {
+        for (JButton b : artistsMap.keySet()) {
             b.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Temporal behaviour (replace for observer pattern)
-                    cardLayout.show(cardPanel, "Main");
+                    if (!b.isSelected()) {
+                        b.setText("Unfollow");
+                        b.setBackground(new Color(215, 30, 96));
+                        System.out.println(artistsMap.get(b));
+
+                        // Replace for observer pattern
+                        /*
+                        subjs[?].attach(obs);
+                        */
+                    } else {
+                        b.setText("Follow");
+                        b.setBackground(new Color(30, 215, 96));
+
+                        // Replace for observer pattern
+                        /*
+                        subjs[?].dettach(obs);
+                        */
+                    }
+
+                    b.setSelected(!b.isSelected());
                 }
             });
         }
 
-        for (JButton b: addSongButtons) {
+        for (JButton b : playlistsMap.keySet()) {
             b.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Temporal behaviour (replace for observer pattern)
+                    /*
+                    subjs[?].update();
+                     */
+                    System.out.println(playlistsMap.get(b));
                     cardLayout.show(cardPanel, "Main");
                 }
             });
@@ -102,9 +126,17 @@ public class mainGUI extends JFrame {
         setVisible(true);
     }
 
-    private JPanel newSubPanel(String[] names, String button) {
+    private JPanel newSubPanel(String title, String[] names, String button) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JPanel titlePanel = new JPanel();
+        JLabel label = new JLabel(title);
+        label.setFont(new Font("SansSerif", Font.BOLD, 60));
+        label.setForeground(Color.WHITE);
+        titlePanel.add(label);
+        titlePanel.setBackground(new Color(25, 20, 20));
+        panel.add(titlePanel);
 
         for (int i = 0; i < names.length; i++) {
             panel.add(newItemPanel(names[i], button));
@@ -136,9 +168,9 @@ public class mainGUI extends JFrame {
         panel.add(button);
 
         if (type == "Follow") {
-            followButtons.add(button);
+            artistsMap.put(button, text);
         } else {
-            addSongButtons.add(button);
+            playlistsMap.put(button, text);
         }
 
         return panel;
@@ -148,6 +180,32 @@ public class mainGUI extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                /*
+                Observer obs = new User();
+                ArrayList<Subject> subjs;
+
+                Subject pl1 = new Playlist();
+                Subject pl2 = new Playlist();
+                Subject pl3 = new Playlist();
+                pl1.attach(obs);
+                pl2.attach(obs);
+                pl3.attach(obs);
+
+
+                Subject art1 = new Artist();
+                Subject art2 = new Artist();
+                Subject art3 = new Artist();
+                art1.update();
+                art2.update();
+                art3.update();
+
+                subjs.add(pl1);
+                subjs.add(pl2);
+                subjs.add(pl3);
+                subjs.add(art1);
+                subjs.add(art2);
+                subjs.add(art3);
+                 */
                 new mainGUI();
             }
         });
