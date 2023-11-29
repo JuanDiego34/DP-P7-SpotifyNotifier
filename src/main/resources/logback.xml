@@ -1,0 +1,8 @@
+<configuration>
+
+    <!-- Your existing Logback configuration, if any -->
+
+    <!-- Suppress logs from Apache HttpClient -->
+    <logger name="org.apache.hc" level="ERROR" />
+
+</configuration>
