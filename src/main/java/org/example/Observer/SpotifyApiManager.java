@@ -15,7 +15,7 @@ import java.io.IOException;
  *
  * @implNote Implements SpotifySubject for observer pattern integration.
  */
-public class SpotifyApiManager implements SpotifySubject {
+public class SpotifyApiManager {
 
     /**
      * Client ID for Spotify API, obtained from Spotify Developer Dashboard.
@@ -39,7 +39,7 @@ public class SpotifyApiManager implements SpotifySubject {
      * Authenticates the application to the Spotify Web API using the Client Credentials flow.
      * Sets the access token on the SpotifyApi instance upon successful authentication.
      */
-    @Override
+
     public void authenticate() {
         try {
             ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials().build();
@@ -55,7 +55,7 @@ public class SpotifyApiManager implements SpotifySubject {
      * 
      * @return SpotifyApi The authenticated SpotifyApi instance.
      */
-    @Override
+
     public SpotifyApi getSpotifyApi() {
         return spotifyApi;
     }
