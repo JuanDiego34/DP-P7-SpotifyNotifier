@@ -2,7 +2,7 @@
 # 🎶 Spotify Notifier 🌟
 
 ## 🚀 Overview
-This innovative program enables users to seamlessly follow artists and manage playlists on Spotify. Receive instant notifications for new song releases by your favorite artists or when tracks are added to your playlists.
+This innovative program enables users to seamlessly follow artists and manage playlists on Spotify. Receive instant notifications for new song releases by your favorite artists or when tracks are added to your followed playlists.
 
 ## 🖥️ How to Use
 
