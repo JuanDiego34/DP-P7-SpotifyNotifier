@@ -35,9 +35,9 @@ public abstract class SpotifySubject {
      *
      * Invokes the update method on each of the observers, signaling a change in the artist and playlists.
      */
-    public void notifyObservers() {
+    public void notifyObservers(String message) {
         for (SpotifyObserver observer : observers) {
-            observer.update();
+            observer.update(message);
         }
     }
 

@@ -18,6 +18,7 @@ public class mainGUI extends JFrame {
     private ArrayList<JButton> returnButtons;
     private HashMap<JButton, String> artistsMap, playlistsMap;
     private static ArrayList<SpotifySubject> subjsArtists, subjsPlaylists;
+    private static SpotifyObserver observer;
 
     public mainGUI() {
         // Window configuration
@@ -78,20 +79,21 @@ public class mainGUI extends JFrame {
                     if (!b.isSelected()) {
                         b.setText("Unfollow");
                         b.setBackground(new Color(215, 30, 96));
-                        System.out.println(artistsMap.get(b));
 
-                        // Replace for observer pattern
-                        /*
-                        subjs[?].attach(obs);
-                        */
+                        for (int i = 0; i < artistsMap.size(); i++) {
+                            if (subjsArtists.get(i).getName() == artistsMap.get(b)) {
+                                subjsArtists.get(i).attach(observer);
+                            }
+                        }
                     } else {
                         b.setText("Follow");
                         b.setBackground(new Color(30, 215, 96));
 
-                        // Replace for observer pattern
-                        /*
-                        subjs[?].dettach(obs);
-                        */
+                        for (int i = 0; i < artistsMap.size(); i++) {
+                            if (subjsArtists.get(i).getName() == artistsMap.get(b)) {
+                                subjsArtists.get(i).detach(observer);
+                            }
+                        }
                     }
 
                     b.setSelected(!b.isSelected());
@@ -103,12 +105,11 @@ public class mainGUI extends JFrame {
             b.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Temporal behaviour (replace for observer pattern)
-                    /*
-                    subjs[?].update();
-                     */
-                    System.out.println(playlistsMap.get(b));
-                    cardLayout.show(cardPanel, "Main");
+                    for (int i = 0; i < playlistsMap.size(); i++) {
+                        if (subjsPlaylists.get(i).getName() == playlistsMap.get(b)) {
+                            subjsPlaylists.get(i).notifyObservers("A song has been added to " + playlistsMap.get(b) + "!");
+                        }
+                    }
                 }
             });
         }
@@ -177,8 +178,6 @@ public class mainGUI extends JFrame {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(25, 20, 20));
 
-        System.out.println(image);
-
         try {
             URL url = new URL(image.getUrl());
             ImageIcon imageIcon = new ImageIcon(url);
@@ -213,23 +212,20 @@ public class mainGUI extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                SpotifyObserver obs = new User();
+                observer = new User();
                 subjsArtists = new ArrayList<SpotifySubject>();
                 subjsPlaylists = new ArrayList<SpotifySubject>();
 
                 SpotifySubject pl1 = new PlaylistSubjectImpl("37i9dQZF1DX0XUsuxWHRQd");
                 SpotifySubject pl2 = new PlaylistSubjectImpl("37i9dQZF1DXaxEKcoCdWHD");
                 SpotifySubject pl3 = new PlaylistSubjectImpl("37i9dQZF1DWTl4y3vgJOXW");
-                pl1.attach(obs);
-                pl2.attach(obs);
-                pl3.attach(obs);
+                pl1.attach(observer);
+                pl2.attach(observer);
+                pl3.attach(observer);
 
                 SpotifySubject art1 = new ArtistSubjectImpl("3TVXtAsR1Inumwj472S9r4");
                 SpotifySubject art2 = new ArtistSubjectImpl("52iwsT98xCoGgiGntTiR7K");
                 SpotifySubject art3 = new ArtistSubjectImpl("1Xyo4u8uXC1ZmMpatF05PJ");
-                /*art1.update();
-                art2.update();
-                art3.update();*/
 
                 subjsPlaylists.add(pl1);
                 subjsPlaylists.add(pl2);
@@ -237,6 +233,9 @@ public class mainGUI extends JFrame {
                 subjsArtists.add(art1);
                 subjsArtists.add(art2);
                 subjsArtists.add(art3);
+
+                // Implement timers for every artist to "upload" a song every 5 seconds
+                // Use subjsArtists.get(i).notifyObservers() to simulate upload (See line 110)
 
                 new mainGUI();
             }

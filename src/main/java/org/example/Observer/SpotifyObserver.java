@@ -5,5 +5,5 @@ package org.example.Observer;
  * Declares the update method that gets called when SpotifySubject notifies changes.
  */
 public interface SpotifyObserver {
-    boolean update();
+    boolean update(String message);
 }

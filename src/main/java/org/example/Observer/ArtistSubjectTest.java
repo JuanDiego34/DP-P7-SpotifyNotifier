@@ -48,7 +48,7 @@ public class ArtistSubjectTest {
      */
     static class YourCustomObserver implements SpotifyObserver {
         @Override
-        public boolean update() {
+        public boolean update(String message) {
             System.out.println("Observer notified: Artist information has changed.");
             return true;
         }

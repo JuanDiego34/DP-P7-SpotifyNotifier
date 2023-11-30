@@ -19,8 +19,9 @@ public class User implements SpotifyObserver {
      * @return boolean Returns true to indicate successful handling of the update.
      */
     @Override
-    public boolean update() {
+    public boolean update(String message) {
         // Here you can add logic for what should happen when the user is notified of a change.
+        System.out.println(message);
         return true;
     }
 }
