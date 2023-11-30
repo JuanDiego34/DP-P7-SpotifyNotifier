@@ -20,7 +20,7 @@ public class User implements SpotifyObserver {
      */
     @Override
     public boolean update(String message) {
-        // Here you can add logic for what should happen when the user is notified of a change.
+        Notification.showNotification(message);
         System.out.println(message);
         return true;
     }
