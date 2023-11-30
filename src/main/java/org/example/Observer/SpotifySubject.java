@@ -29,6 +29,18 @@ public abstract class SpotifySubject {
         this.spotifyApi = spotifyApiManager.getSpotifyApi();
     }
 
+
+    /**
+     * @brief Notifies all attached observers.
+     *
+     * Invokes the update method on each of the observers, signaling a change in the artist and playlists.
+     */
+    public void notifyObservers() {
+        for (SpotifyObserver observer : observers) {
+            observer.update();
+        }
+    }
+
     /**
      * @brief Attaches an observer to the subject.
      * 

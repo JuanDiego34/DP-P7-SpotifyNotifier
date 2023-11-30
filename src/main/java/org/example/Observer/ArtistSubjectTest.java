@@ -25,7 +25,7 @@ public class ArtistSubjectTest {
         artistSubject.attach(new YourCustomObserver());
 
         // Simulate a change in the artist (you can call this method when the artist information changes)
-        artistSubject.updateArtist();
+        // artistSubject.updateArtist();
 
         // Display updated artist information
         displayArtistInfo(artistSubject);

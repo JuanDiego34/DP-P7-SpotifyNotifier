@@ -59,15 +59,4 @@ public class PlaylistSubjectImpl extends SpotifySubject {
     public Image getCover() {
         return playlist.getImages()[0];
     }
-
-    /**
-     * @brief Notifies all attached observers.
-     * 
-     * Invokes the update method on each of the observers, signaling a change in the playlist.
-     */
-    public void AddSong() {
-        for (SpotifyObserver observer : observers) {
-            observer.update();
-        }
-    }
 }

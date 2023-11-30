@@ -1,17 +1,23 @@
 package org.example;
 
+import org.example.Observer.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import se.michaelthelin.spotify.model_objects.specification.Image;
 
 public class mainGUI extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPanel;
     private ArrayList<JButton> returnButtons;
-    HashMap<JButton, String> artistsMap, playlistsMap;
+    private HashMap<JButton, String> artistsMap, playlistsMap;
+    private static ArrayList<SpotifySubject> subjsArtists, subjsPlaylists;
 
     public mainGUI() {
         // Window configuration
@@ -44,11 +50,25 @@ public class mainGUI extends JFrame {
         mainPanel.add(playlistsButton);
 
         // Sub-panels
-        String artistsNames[] = {"Artist 1", "Artist 2", "Artist 3"}; // Replace for Artist method getNames()
-        JPanel artistsPanel = newSubPanel("Artists", artistsNames, "Follow");
+        String artistsNames[] = new String[subjsArtists.size()];
+        Image artistsImages[] = new Image[subjsArtists.size()];
 
-        String playlistsNames[] = {"Playlist 1", "Playlist 2", "Playlist 3"}; // Replace for Playlist method getNames()
-        JPanel playlistsPanel = newSubPanel("Playlists", playlistsNames, "Add song");
+        for (int i = 0; i < subjsArtists.size(); i++) {
+            artistsNames[i] = subjsArtists.get(i).getName();
+            artistsImages[i] = subjsArtists.get(i).getCover();
+        }
+
+        JPanel artistsPanel = newSubPanel("Artists", "Follow", artistsNames, artistsImages);
+
+        String playlistsNames[] = new String[subjsPlaylists.size()];
+        Image playlistsImages[] = new Image[subjsPlaylists.size()];
+
+        for (int i = 0; i < subjsPlaylists.size(); i++) {
+            playlistsNames[i] = subjsPlaylists.get(i).getName();
+            playlistsImages[i] = subjsPlaylists.get(i).getCover();
+        }
+
+        JPanel playlistsPanel = newSubPanel("My playlists", "Add song", playlistsNames, playlistsImages);
 
         // Action listeners
         for (JButton b : artistsMap.keySet()) {
@@ -126,7 +146,7 @@ public class mainGUI extends JFrame {
         setVisible(true);
     }
 
-    private JPanel newSubPanel(String title, String[] names, String button) {
+    private JPanel newSubPanel(String title, String button, String[] names, Image[] images) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -139,7 +159,7 @@ public class mainGUI extends JFrame {
         panel.add(titlePanel);
 
         for (int i = 0; i < names.length; i++) {
-            panel.add(newItemPanel(names[i], button));
+            panel.add(newItemPanel(names[i], images[i], button));
         }
 
         JPanel returnPanel = new JPanel();
@@ -153,9 +173,22 @@ public class mainGUI extends JFrame {
         return panel;
     }
 
-    private JPanel newItemPanel(String text, String type) {
+    private JPanel newItemPanel(String text, Image image, String type) {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(25, 20, 20));
+
+        System.out.println(image);
+
+        try {
+            URL url = new URL(image.getUrl());
+            ImageIcon imageIcon = new ImageIcon(url);
+            java.awt.Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+            ImageIcon newImageIcon = new ImageIcon(scaledImage);
+            JLabel labelImage = new JLabel(newImageIcon);
+            panel.add(labelImage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         JLabel label = new JLabel(text);
         label.setFont(new Font("SansSerif", Font.BOLD, 30));
@@ -180,32 +213,31 @@ public class mainGUI extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                /*
-                Observer obs = new User();
-                ArrayList<Subject> subjs;
+                SpotifyObserver obs = new User();
+                subjsArtists = new ArrayList<SpotifySubject>();
+                subjsPlaylists = new ArrayList<SpotifySubject>();
 
-                Subject pl1 = new Playlist();
-                Subject pl2 = new Playlist();
-                Subject pl3 = new Playlist();
+                SpotifySubject pl1 = new PlaylistSubjectImpl("37i9dQZF1DX0XUsuxWHRQd");
+                SpotifySubject pl2 = new PlaylistSubjectImpl("37i9dQZF1DXaxEKcoCdWHD");
+                SpotifySubject pl3 = new PlaylistSubjectImpl("37i9dQZF1DWTl4y3vgJOXW");
                 pl1.attach(obs);
                 pl2.attach(obs);
                 pl3.attach(obs);
 
-
-                Subject art1 = new Artist();
-                Subject art2 = new Artist();
-                Subject art3 = new Artist();
-                art1.update();
+                SpotifySubject art1 = new ArtistSubjectImpl("3TVXtAsR1Inumwj472S9r4");
+                SpotifySubject art2 = new ArtistSubjectImpl("52iwsT98xCoGgiGntTiR7K");
+                SpotifySubject art3 = new ArtistSubjectImpl("1Xyo4u8uXC1ZmMpatF05PJ");
+                /*art1.update();
                 art2.update();
-                art3.update();
+                art3.update();*/
 
-                subjs.add(pl1);
-                subjs.add(pl2);
-                subjs.add(pl3);
-                subjs.add(art1);
-                subjs.add(art2);
-                subjs.add(art3);
-                 */
+                subjsPlaylists.add(pl1);
+                subjsPlaylists.add(pl2);
+                subjsPlaylists.add(pl3);
+                subjsArtists.add(art1);
+                subjsArtists.add(art2);
+                subjsArtists.add(art3);
+
                 new mainGUI();
             }
         });

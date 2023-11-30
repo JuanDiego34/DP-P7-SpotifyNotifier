@@ -58,15 +58,4 @@ public class ArtistSubjectImpl extends SpotifySubject {
     public Image getCover() {
         return artist.getImages()[0];
     }
-
-    /**
-     * @brief Notifies all attached observers.
-     *
-     * Invokes the update method on each of the observers, signaling a change in the artist.
-     */
-    public void updateArtist() {
-        for (SpotifyObserver observer : observers) {
-            observer.update();
-        }
-    }
 }
