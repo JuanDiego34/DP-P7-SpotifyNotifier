@@ -1,4 +1,4 @@
-package org.example.Observer;
+package Observer;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.model_objects.specification.Image;

@@ -1,4 +1,4 @@
-package org.example.Observer;
+package Observer;
 
 
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -27,7 +27,7 @@ public class PlaylistSubjectImpl extends SpotifySubject {
     /**
      * @brief Constructor for PlaylistSubjectImpl.
      * 
-     * Initializes the SpotifyApiManager instance, authenticates, and assigns the SpotifyApi instance.
+     * Initializes the Observer.SpotifyApiManager instance, authenticates, and assigns the SpotifyApi instance.
      * It also fetches the specified playlist by its ID.
      * 
      * @param idPlaylist The Spotify playlist ID to manage and observe.

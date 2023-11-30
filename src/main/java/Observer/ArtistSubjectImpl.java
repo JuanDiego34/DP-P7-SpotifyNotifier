@@ -1,4 +1,4 @@
-package org.example.Observer;
+package Observer;
 
 import org.apache.hc.core5.http.ParseException;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -26,7 +26,7 @@ public class ArtistSubjectImpl extends SpotifySubject {
     /**
      * @brief Constructor for ArtistSubjectImpl.
      *
-     * Initializes the SpotifyApiManager instance, authenticates, and assigns the SpotifyApi instance.
+     * Initializes the Observer.SpotifyApiManager instance, authenticates, and assigns the SpotifyApi instance.
      * It also fetches the specified artist by its ID.
      *
      * @param idArtist The Spotify artist ID to manage and observe.

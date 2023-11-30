@@ -1,4 +1,4 @@
-package org.example.Observer;
+package Observer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class Notification {
         }
 
         // Create a JFrame for the notification
-        JFrame notificationFrame = new JFrame("Notification");
+        JFrame notificationFrame = new JFrame("Observer.Notification");
         notificationFrame.setSize(300, 100);
         notificationFrame.setUndecorated(true);
 

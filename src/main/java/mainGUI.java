@@ -1,6 +1,4 @@
-package org.example;
-
-import org.example.Observer.*;
+import Observer.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -240,7 +238,7 @@ public class mainGUI extends JFrame {
                     Timer timer = new Timer(5000, new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            subjsPlaylists.get(finalI).notifyObservers(subjsArtists.get(finalI).getName() + " uploaded new song!");
+                            subjsArtists.get(finalI).notifyObservers(subjsArtists.get(finalI).getName() + " uploaded new song!");
                         }
                     });
                     timer.start();

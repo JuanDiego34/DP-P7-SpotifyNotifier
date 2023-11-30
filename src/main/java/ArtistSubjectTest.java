@@ -1,5 +1,5 @@
-package org.example.Observer;
-
+import Observer.ArtistSubjectImpl;
+import Observer.SpotifyObserver;
 import se.michaelthelin.spotify.model_objects.specification.Image;
 
 /**

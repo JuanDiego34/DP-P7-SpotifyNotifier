@@ -1,4 +1,4 @@
-package org.example.Observer;
+package Observer;
 
 /**
  * @class User
