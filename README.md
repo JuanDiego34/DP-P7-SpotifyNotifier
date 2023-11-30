@@ -1,33 +1,51 @@
 # 🎶 Spotify Notifier
 
-This program lets the user follow certain artists and add tracks to playlists. The user will get notified every time:
-- A followed artist uploads a song.
-- A track gets added to a playlist.
+This program allows users to follow artists and manage playlists on Spotify. Users receive notifications when a followed artist releases a new song or a track is added to their playlists.
 
 ## 🖥️ Usage
 
-```will be added once the project get's finished```
-``` keep it mind that this project works with maven as well```
+### Setup and Run with IntelliJ
+1. **Clone the Repository**: Clone this repository to your local machine.
+2. **Open the Project in IntelliJ**:
+    - Open IntelliJ IDEA.
+    - Select `Open or Import`.
+    - Navigate to the cloned repository and select the project directory.
+3. **Maven Configuration**:
+    - Ensure that Maven is properly set up in IntelliJ.
+    - In the `Project Structure`, set the project SDK to a compatible Java version (e.g., Java 11).
+    - IntelliJ should automatically detect and load the Maven project.
+4. **Running the Application**:
+    - Navigate to `src/main/java/org/example/MainGUI.java`.
+    - Right-click and select `Run 'MainGUI.main()'`.
 
-## 🌐 More information
+### Run via Terminal
+1. **Clone the Repository**: Clone this repository to your local machine.
+2. **Navigate to Project Directory**:
+    - Open the terminal.
+    - Navigate to `src/main/java/org/example` in the project directory.
+3. **Compile and Run**:
+    - Compile the project using the command: `javac MainGUI.java`.
+    - Run the application with the command: `java MainGUI`.
 
-This program uses the following Spotify API client: [Spotify Web API Java](https://github.com/spotify-web-api-java/spotify-web-api-java/tree/master)
+## 🌐 More Information
+
+This program utilizes the Spotify Web API Java client, which can be found [here](https://github.com/spotify-web-api-java/spotify-web-api-java/tree/master).
 
 ## 🚀 Project Structure
 
-Developed in Java, this project is organized into four key branches:
-1. **GUI Branch**: Focused on creating a user-friendly graphical user interface.
-2. **Observer Pattern Branch**: Implements the observer pattern for enhanced interaction.
-3. **Artists Functionality Branch**: Deals with the functionalities related to artists.
-4. **Playlists Functionality Branch**: Handles features related to playlist management.
+Developed in Java, this project has four key branches:
+1. **GUI Branch**: Focuses on the graphical user interface.
+2. **Observer Pattern Branch**: Implements observer patterns for real-time updates.
+3. **Artists Functionality Branch**: Manages artist-related features.
+4. **Playlists Functionality Branch**: Oversees playlist functionalities.
 
 ## 👥 Team
 
-The project is developed by:
-
+Developers of this project:
 - **Eduardo Jose Barrios Garcia**
-  - 📧 Email: [eduardojbarriosgarcia@gmail.com](mailto:eduardojbarriosgarcia@gmail.com)
+  - 📧 [eduardojbarriosgarcia@gmail.com](mailto:eduardojbarriosgarcia@gmail.com)
 - **Juan Diego Rendon Cachafeiro**
-  - 📧 Email: [ejemplo@ull.edu.es](mailto:ejemplo@ull.edu.es)
+  - 📧 [ejemplo@ull.edu.es](mailto:ejemplo@ull.edu.es)
 - **Oleg Petrov**
-  - 📧 Email: [example@example.com](mailto:example@example.com)
+  - 📧 [example@example.com](mailto:example@example.com)
+
