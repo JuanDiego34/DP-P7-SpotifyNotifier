@@ -22,6 +22,8 @@ public class Notification {
 
         // Create a JLabel to display the message
         JLabel messageLabel = new JLabel(message);
+        Font font = new Font("SansSerif", Font.BOLD, 16); // Adjust the font size as needed
+        messageLabel.setFont(font);
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
         notificationFrame.add(messageLabel);
 
