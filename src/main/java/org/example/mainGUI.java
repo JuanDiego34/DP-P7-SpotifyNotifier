@@ -235,8 +235,16 @@ public class mainGUI extends JFrame {
                 subjsArtists.add(art3);
 
                 // Implement timers for every artist to "upload" a song every 5 seconds
-                // Use subjsArtists.get(i).notifyObservers() to simulate upload (See line 110)
-
+                for (int i = 0; i < subjsArtists.size(); i++) {
+                    int finalI = i;
+                    Timer timer = new Timer(5000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            subjsPlaylists.get(finalI).notifyObservers("New song has been added to " + subjsArtists.get(finalI).getName() + "!");
+                        }
+                    });
+                    timer.start();
+                }
                 new mainGUI();
             }
         });
