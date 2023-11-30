@@ -15,8 +15,8 @@ public class Notification {
         // Set the location to be more to the right of the screen
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-        int xPosition = screenWidth / 2 - notificationFrame.getWidth() / 4; // Adjust the value as needed
-        int yPosition = screenHeight / 2;
+        int xPosition = screenWidth / 2 - notificationFrame.getWidth() / 2 + 220; // Adjust the value as needed
+        int yPosition = screenHeight / 2 - notificationFrame.getHeight() / 2 - 220;
 
         notificationFrame.setLocation(xPosition, yPosition);
 
